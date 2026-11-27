@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join on Gonna</title>
+<style>
+  :root { color-scheme: light dark; --bg:#fff; --fg:#111; --mut:#666; --acc:#111; --on:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#000; --fg:#f5f5f5; --mut:#999; --acc:#f5f5f5; --on:#000; } }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--fg);
+    font:17px/1.4 -apple-system, system-ui, sans-serif; text-align:center; padding:0 16px; }
+  main { max-width:340px; }
+  h1 { font-size:26px; margin:0 0 8px; }
+  p { color:var(--mut); margin:0 0 24px; }
+  a.btn { display:block; padding:14px; border-radius:14px; background:var(--acc); color:var(--on); text-decoration:none; font-weight:600; margin-bottom:12px; }
+  a.alt { color:var(--mut); font-size:15px; }
+  code { letter-spacing:2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>You're invited</h1>
+  <p>Open this invitation in Gonna. Code <code id="code"></code></p>
+  <a class="btn" id="open" href="#">Open in Gonna</a>
+  <p class="alt">Don't have Gonna yet? Ask whoever invited you for a TestFlight invite.</p>
+</main>
+<script>
+  if (location.pathname.split("/").filter(Boolean)[0] !== "invite") { document.querySelector("main").innerHTML = "<h1>Page not found</h1><p><a href=\"/\">Gonna</a></p>"; throw 0; }
+  // Fill in once. The publishable key is public by design.
+  var SUPABASE_URL = "https://nahnvkwwiijnxwoidqgn.supabase.co";
+  var PUBLISHABLE_KEY = "sb_publishable_5ScSNSMyO7nuvsznAO2Sng_HIGzFB2I";
+
+  var parts = location.pathname.split("/").filter(Boolean);
+  var code = (parts[1] || "").toUpperCase();
+  document.getElementById("code").textContent = code;
+  var open = document.getElementById("open");
+
+  // If the app is installed, iOS opens it before this page loads. Otherwise
+  // resolve the code and hand over to the existing invite edge function.
+  fetch(SUPABASE_URL + "/rest/v1/rpc/invite_token_for_code", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: PUBLISHABLE_KEY, Authorization: "Bearer " + PUBLISHABLE_KEY },
+    body: JSON.stringify({ p_code: code })
+  }).then(function (r) { return r.json(); }).then(function (token) {
+    if (typeof token !== "string") throw new Error("unknown code");
+    var fn = SUPABASE_URL + "/functions/v1/invite?t=" + encodeURIComponent(token);
+    open.href = fn;
+    location.replace(fn);
+  }).catch(function () {
+    open.textContent = "This invitation is no longer valid";
+    open.removeAttribute("href");
+  });
+</script>
+</body>
+</html>

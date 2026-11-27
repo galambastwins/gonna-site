@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.galambastwins.gonna",
+      "sha256_cert_fingerprints": [
+        "2C:12:CA:DD:83:61:00:63:27:DB:E4:E6:E8:3A:FB:C4:B7:89:FD:D5:D0:2D:8E:42:AA:8A:7D:E6:15:86:50:46"
+      ]
+    }
+  }
+]

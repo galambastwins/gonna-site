@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["42G93B7YXA.com.galambastwins.gonna"],
+        "components": [{ "/": "/invite/*" }]
+      }
+    ]
+  }
+}

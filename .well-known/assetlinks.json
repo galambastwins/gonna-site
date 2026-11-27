@@ -1,11 +1,15 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.galambastwins.gonna",
       "sha256_cert_fingerprints": [
-        "2C:12:CA:DD:83:61:00:63:27:DB:E4:E6:E8:3A:FB:C4:B7:89:FD:D5:D0:2D:8E:42:AA:8A:7D:E6:15:86:50:46"
+        "2C:12:CA:DD:83:61:00:63:27:DB:E4:E6:E8:3A:FB:C4:B7:89:FD:D5:D0:2D:8E:42:AA:8A:7D:E6:15:86:50:46",
+        "04:D8:51:AD:B4:B4:F7:77:71:4D:8B:6C:90:94:F6:F6:7C:3E:E8:75:D5:34:85:74:6B:8E:B7:6F:48:20:CE:7D",
+        "D4:A8:B6:9D:09:74:4D:91:9B:35:DE:8D:52:A0:BF:86:61:20:43:99:07:A9:0D:A6:8A:62:AF:2C:15:DC:25:98"
       ]
     }
   }
